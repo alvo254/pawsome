@@ -1,5 +1,6 @@
 module "vpc" {
   source = "./modules/vpc"
+  instance_id = module.ec2.instance_id
 }
 
 module "sg" {

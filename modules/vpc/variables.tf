@@ -17,3 +17,7 @@ variable "public_subnet" {
 variable "private_subnet" {
   default = "10.0.8.0/21"
 }
+
+variable "instance_id" {
+  type = string
+}

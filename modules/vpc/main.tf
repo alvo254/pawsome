@@ -72,3 +72,30 @@ resource "aws_route_table_association" "pawsome" {
 }
 
 
+resource "aws_nat_gateway" "pawsome" {
+  allocation_id = aws_eip.pawsome.id
+  subnet_id     = aws_subnet.private_subent1.id
+
+  tags = {
+    Name = "pawsome-NAT-gw"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.pawsome]
+}
+
+resource "aws_eip" "pawsome" {
+  instance = var.instance_id
+  domain   = "vpc"
+}
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.vpc.id
+}
+
+resource "aws_route" "private_internet" {
+  route_table_id            = aws_route_table.private.id
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id            = aws_nat_gateway.pawsome.id
+}
