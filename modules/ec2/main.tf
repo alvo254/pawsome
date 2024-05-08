@@ -12,7 +12,7 @@ resource "aws_instance" "pawsome" {
 
 
     tags = {
-        Name = "pulse"
+        Name = "pawsome"
     }
 }
 

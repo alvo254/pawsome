@@ -7,8 +7,9 @@ cloud study group challange project
 3.The VPC should accommodate 3200 IPs and include both public and private subnets.
 5.Establish a NAT gateway for the instances in the private subnet to facilitate connections to the internet.
 6.Create a Load Balancer for EC2 instances to handle load balancing and routing. Attach the private Application Load Balancer to the private EC2 instances.
-7.Create EC2 instances in the private subnet and install Apache server to serve as a web server for the websitePlease Make sure of the pointer mentioned belowTimeline :- 
-2 weeksif extended then no worries but it will good to finish under estimated time 
+7.Create EC2 instances in the private subnet and install Apache server to serve as a web server for the website
+Please Make sure of the pointer mentioned belowTimeline :- 
+2 weeks if extended then no worries but it will good to finish under estimated time 
 
 1. [IMPORTANT] Architecture Diagram is important
 2. [GOOD TO HAVE] Using infrastructure as code to Create resources on AWS 
