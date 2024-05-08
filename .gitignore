@@ -1,0 +1,7 @@
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
+terraform.tfstate
+alvo-ssh-keys.pem
+.terraform.tfstate.lock.info
+paw-key.pem
