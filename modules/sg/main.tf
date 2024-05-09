@@ -33,7 +33,7 @@ resource "aws_security_group" "pawsome" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks      = ["102.216.154.33/32"] //Please change to your own IP address for this to work
+      cidr_blocks      = ["102.216.154.10/32"] //Please change to your own IP address for this to work
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []

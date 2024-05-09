@@ -88,6 +88,9 @@ resource "aws_nat_gateway" "pawsome" {
 resource "aws_eip" "pawsome" {
   instance = var.instance_id
   domain   = "vpc"
+  tags = {
+    Name = "${var.project}-${var.env}-EIP"
+  }
 }
 
 resource "aws_route_table" "private" {
