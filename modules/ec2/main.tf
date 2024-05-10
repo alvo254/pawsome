@@ -42,8 +42,10 @@ resource "aws_instance" "bastion_host" {
     host                = self.private_ip
     bastion_host        = aws_instance.bastion_host.public_ip
     bastion_user        = "ec2-user"
-    bastion_private_key = file("${path.root}./pawsome/paw-key.pem")
+    bastion_private_key = file("${path.root}/pawsome/paw-key.pem")
   }
+
+
 
   tags = {
     Name = "bastion_host"
