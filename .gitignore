@@ -5,3 +5,5 @@ terraform.tfstate
 alvo-ssh-keys.pem
 .terraform.tfstate.lock.info
 paw-key.pem
+modules/ec2/private_key
+modules/ec2/private_key.pub
