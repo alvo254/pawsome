@@ -12,5 +12,6 @@ module "ec2" {
   source = "./modules/ec2"
   private_subent1 = module.vpc.private_subent1
   security_group = module.sg.security_group
-  
+  public_subnet = module.vpc.public_subnet1
+  bastion_host_sg = module.sg.bastion_host_sg
 }

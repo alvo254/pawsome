@@ -28,7 +28,7 @@ resource "aws_subnet" "public_subnet1" {
 resource "aws_subnet" "private_subent1" {
   vpc_id = aws_vpc.vpc.id
   cidr_block              = var.private_subnet
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
   availability_zone       = data.aws_availability_zones.available_zones.names[0] 
 
 
@@ -72,9 +72,10 @@ resource "aws_route_table_association" "pawsome" {
 }
 
 
+# EIP may require IGW to exist prior to association. Use depends_on to set an explicit dependency on the IGW.
 resource "aws_nat_gateway" "pawsome" {
   allocation_id = aws_eip.pawsome.id
-  subnet_id     = aws_subnet.private_subent1.id
+  subnet_id     = aws_subnet.public_subnet1.id
 
   tags = {
     Name = "pawsome-NAT-gw"
@@ -86,7 +87,7 @@ resource "aws_nat_gateway" "pawsome" {
 }
 
 resource "aws_eip" "pawsome" {
-  instance = var.instance_id
+  # instance = var.instance_id
   domain   = "vpc"
   tags = {
     Name = "${var.project}-${var.env}-EIP"
@@ -95,10 +96,19 @@ resource "aws_eip" "pawsome" {
 
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = "${var.project}-${var.env}-prvt-rt"
+  }
 }
 
 resource "aws_route" "private_internet" {
   route_table_id            = aws_route_table.private.id
   destination_cidr_block    = "0.0.0.0/0"
   nat_gateway_id            = aws_nat_gateway.pawsome.id
+}
+
+resource "aws_route_table_association" "pawsome_prvt_association" {
+  route_table_id = aws_route_table.private.id
+  subnet_id = aws_subnet.private_subent1.id
 }
